@@ -5,104 +5,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/js/chat.js"></script>
-		<div class="content container-fluid">
-					<section class="page-content p-t-30" id="message-wrapper">
-						<div class="card">
-							<div class="card-header">
-<h1>User List</h1>
+		
+<div class="content container-fluid">
+<section class="page-content p-t-30" id="message-wrapper">
 
-<p>
-    <a asp-action="ExportToExcel">Export to excel</a>
-</p>
-</div>
-<div class="card-body">
-<table class="table">
-    <thead>
-        <tr>
-             <th>
-               Photo
-            </th>
-            <th>
-               Firstname
-            </th>
-            <th>
-               Lastname
-            </th>
-            <th>
-               Email
-            </th>
-            <th>
-               Phone
-            </th>
+    <div class="card">
+        <div class="card-header">
+            <h1>User List</h1>
+
+            <p>
+                <a asp-action="ExportToExcel">Export to excel</a>
+            </p>
+
+        </div>
+
+        <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                     <th>
+                       Photo
+                    </th>
+                    <th>
+                       Firstname
+                    </th>
+                    <th>
+                       Lastname
+                    </th>
+                    <th>
+                       Email
+                    </th>
+                    <th>
+                       Phone
+                    </th>
           
            
-            <th>
-                Company
-            </th>
-            <th>
-              Job
-            </th>
-            <th>
-               Role
-            </th>
-             <th>
+                    <th>
+                        Company
+                    </th>
+                    <th>
+                      Job
+                    </th>
+                    <th>
+                       Role
+                    </th>
+                     <th>
                
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-             <td>
-                 <img width="40" src="/@item.images">
-               
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.phone)
-            </td>
-           
-          
-           
-              <td>
-                @Html.DisplayFor(modelItem => item.company)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.jobname)
-            </td>
-           <td>
-                @Html.DisplayFor(modelItem => item.role)
-            </td>
-               
-               
-             <td>
-                <a class="btn btn-info" asp-action="Edituser" asp-route-id="@item.userid">Edit</a>|
-                @if(item.role!="admin"){
-                if (item.isblock==true) {
-                     <a class="btn btn-success" asp-action="Blockunblock" asp-route-id="@item.userid">Unblock</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                    <img width="40" src="/@item.images">              
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone)
+                    </td>
+      
+                    <td>
+                        @Html.DisplayFor(modelItem => item.company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role)
+                    </td>
+ 
+                    <td>
+                    <a class="btn btn-info" asp-action="Edituser" asp-route-id="@item.userid">Edit</a>|
+                    @if(item.role!="admin"){
+                    if (item.isblock==true) {
+                            <a class="btn btn-success" asp-action="Blockunblock" asp-route-id="@item.userid">Unblock</a>
                   
-                }
-                else
-                {
-                     <a class="btn btn-danger" asp-action="Blockunblock" asp-route-id="@item.userid">Block</a>
+                    }
+                    else
+                    {
+                            <a class="btn btn-danger" asp-action="Blockunblock" asp-route-id="@item.userid">Block</a>
                
-                } 
-                } 
-             </td>
+                    } 
+                    } 
+                    </td>
             
-        </tr>
-}
-    </tbody>
-</table>
-</div>
+                </tr>
+            }
+            </tbody>
+        </table>
+        </div>
 </div>
 </section>
 </div>

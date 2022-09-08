@@ -5,66 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-		<div class="content container-fluid">
-					<section class="page-content p-t-30" id="message-wrapper">
-						<div class="card">
-							<div class="card-header">
-<h1>Edit User</h1>
-</div>
-<div class="d-flex flex fixed-height" id="3-col-wrapper">
+<div class="content container-fluid">
+<section class="page-content p-t-30" id="message-wrapper">
+    <div class="card">
+    <div class="card-header">
+    <h1>Edit User</h1>
+    </div>
+
+    <div class="d-flex flex fixed-height" id="3-col-wrapper">
 
         <form asp-action="Edituser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="userid" />
             <div class="row">
-    <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="firstname" class="control-label">First name</label>
-                <input asp-for="firstname" class="form-control" />
-                <span asp-validation-for="firstname" class="text-danger"></span>
-            </div>
-             </div>
-             <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="lastname" class="control-label">Last name</label>
-                <input asp-for="lastname" class="form-control" />
-                <span asp-validation-for="lastname" class="text-danger"></span>
-            </div>
-             </div>
+            
             <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="email" class="control-label">Email</label>
-                <input asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="firstname" class="control-label">First name</label>
+                    <input asp-for="firstname" class="form-control" />
+                    <span asp-validation-for="firstname" class="text-danger"></span>
+                </div>
+                </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="lastname" class="control-label">Last name</label>
+                    <input asp-for="lastname" class="form-control" />
+                    <span asp-validation-for="lastname" class="text-danger"></span>
+                </div>
+                </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="email" class="control-label">Email</label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="phone" class="control-label">Phone</label>
+                    <input asp-for="phone" class="form-control" />
+                    <span asp-validation-for="phone" class="text-danger"></span>
+                </div>
             </div>
-              <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="phone" class="control-label">Phone</label>
-                <input asp-for="phone" class="form-control" />
-                <span asp-validation-for="phone" class="text-danger"></span>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="role" class="control-label">Role</label>
+                    <input asp-for="role" class="form-control" />
+                    <span asp-validation-for="role" class="text-danger"></span>
+                </div>
             </div>
-             </div>
-             <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="role" class="control-label">Role</label>
-                <input asp-for="role" class="form-control" />
-                <span asp-validation-for="role" class="text-danger"></span>
-            </div>
-           </div>
            
-        
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
-            </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
             </div>
         </form>
    
-
-<div>
-    <a asp-action="Userlist">Back to List</a>
-</div>
-</div>
-</div>
+        <div>
+            <a asp-action="Userlist">Back to List</a>
+        </div>
+    </div>
+    </div>
 </section>
 </div>

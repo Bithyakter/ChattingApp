@@ -11,6 +11,7 @@ connection.on("RefreshChat", function () {
     Getallnotification();
     Getchatmember();
 });
+
 connection.on("RefreshMember", function () {
     Getallmassage(0,0);
     Getallmember();
@@ -29,7 +30,6 @@ connection.start().then(function () {
 }).catch(function (err) {
     return alert('Can not conect!!!');
 });
-
 
 function Getallmassage(x,y) {
     $.ajax({

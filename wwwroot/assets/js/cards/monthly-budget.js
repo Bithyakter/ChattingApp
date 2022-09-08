@@ -10,6 +10,7 @@
 // assets/vendor/flot.curvedlines/curvedLines.js
 // -----------------------------------------------------------------------------
 
+
 (function(window, document, $, undefined) {
 	  "use strict";
 	$(function() {
