@@ -1,0 +1,24 @@
+﻿@model ChattingApp.Models.Userinfo
+@{
+    ViewData["Title"] = "Confirmation";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+  <div class="card">
+      <label>@TempData["msg"]</label>
+      <form asp-action="Confirmation">
+          <div class="card-header">
+              <h4>Confirmation code</h4>
+          </div> 
+          <div class="card-body">
+               <input type="hidden" name="useremail" value="@Model.email"/>
+                  <div class="d-flex flex-row" >
+                   <input type="number" name="confarmation" required/>
+                   <button type="submit">Confirm</button><br />
+                   <a asp-action="Resend" asp-route-id="@Model.email">Resend Email</a>
+                  </div>
+                 
+          </div>
+          </form>
+        </div>
+

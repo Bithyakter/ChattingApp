@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+     ul {
+	
+	width: 300px;
+	list-style-type: none;
+}
+</style>
+ <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<script src="~/js/chat.js"></script>
+
+
+				<div class="content container-fluid">
+					<section class="page-content p-t-30" id="message-wrapper">
+						<div class="card">
+							<div class="d-flex flex fixed-height" id="3-col-wrapper">
+								<aside class="aside aside-left flex-fill">
+									<div class="search-wrapper p-t-15 p-r-20 p-b-0 p-l-20">
+										<button class="search-button-submit" type="submit"><i class="icon dripicons-search"></i></button>
+										<input type="text" class="search-input" placeholder="Search..." onkeyup="getUserList(event)">
+									 <ul class="list-group-item" id="userlistdata">
+                   
+                                      </ul>
+									</div>
+									<div class="contact-list">
+										<ul class="list-group" data-scroll="minimal-dark">
+											<li class="list-group-item active" id="group">
+												
+											</li>
+											<hr />
+											<li class="list-group-item" id="chatmember">
+												
+											</li>
+											
+										</ul>
+									</div>
+								</aside>
+								<section class="center-content flex-fill bg-light">
+									<div class="toolbar border-bottom">
+										<ul class="actions top-left">
+											
+											<li>
+												<div class="float-left avatar-wrapper">
+													<img src="" alt="contact person" id="showimg" class="rounded-circle w-40 h-40 m-r-10">
+													
+												</div>
+												<div class="float-left">
+													<span class="d-block m-t-10"><label id="showname"></label></span>
+												</div>
+												<div class="float-left">
+													<span class="d-block m-t-10"><label id="showst"></label></span>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<section class="chat-contents">
+										<div class="chat-content-wrap">
+											<div class="chat-wrap-inner scroll-bottom" data-scroll="minimal-dark">
+													 <input type="hidden" id="uid"/>
+                               <input type="hidden" id="gid"/>
+                                <input type="hidden" id="mtype"/>
+												<div class="chats" id="massage">
+														<div class="chat chat-right">
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>Hey, I'm back in town...you wanna meet-up for coffee?</p>
+																											<p>I have a new project to run by you.</p>
+																		<span class="chat-time">9:00 am</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="chat chat-right">
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content"> 
+																	<p>Hi</p >
+																		<span class="chat-time">6:26 PM</span>
+																		</div>
+																		</div>
+																		</div>
+																		</div>
+														<div class="chat chat-left">
+															<div class="chat-avatar">
+																<a href="profile.html" class="avatar">
+																	<img alt="" src="../assets/img/avatars/9.jpg" class="img-responsive img-circle">
+																</a>
+															</div>
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>Yeah that sounds great! </p>
+																		<span class="chat-time">9:05 am</span>
+																	</div>
+																</div>
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>I'll meet you at the coffee shop around the corner.</p>
+																		<span class="chat-time">9:06 am</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="chat-line">
+															<span class="chat-date">October 27th, 2018</span>
+														</div>
+														<div class="chat chat-right">
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>Hey, I have those wireframes ready.</p>
+																		<span class="chat-time">11:05 am</span>
+																	</div>
+																</div>
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>I'll upload them to our accound for you to review.</p>
+																		<span class="chat-time">11:06 am</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="chat chat-left">
+															<div class="chat-avatar">
+																<a href="profile.html" class="avatar">
+																	<img alt="" src="../assets/img/avatars/9.jpg" class="img-responsive img-circle">
+																</a>
+															</div>
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>Awesome I'm looking forward to it.</p>
+																		<span class="chat-time">11:10 am</span>
+																	</div>
+																</div>
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>I created a new project folder for them, please upload them here too so I can preview them.</p>
+																		<span class="chat-time">11:11 am</span>
+																	</div>
+																</div>
+																<div class="chat-bubble">
+																	<div class="chat-content img-content">
+																		<div class="chat-img-group clearfix">
+																			<p>Also be sure to check them into the repo.</p>
+																		</div>
+																		<span class="chat-time">11:12 am</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="chat chat-right">
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content img-content">
+																		<div class="chat-img-group clearfix">
+																			<p>Uploaded 4 Images</p>
+																			<a class="chat-img-attach d-inline-block" href="javascript:void(0)">
+																				<img alt="" class="max-w-100" src="../assets/img/demos/wire-1.jpg">
+																				<div class="chat-meta">
+																					<div class="chat-file-name">Lo-Fi_1.jpg</div>
+																					<div class="chat-file-size">627 KB</div>
+																				</div>
+																			</a>
+																			<a class="chat-img-attach d-inline-block" href="javascript:void(0)">
+																		<img alt="" class="max-w-100" src="../assets/img/demos/wire-2.jpg">
+																				<div class="chat-meta">
+																					<div class="chat-file-name">Lo-Fi_2.jpg</div>
+																					<div class="chat-file-size">627 KB</div>
+																				</div>
+																			</a>
+																			<a class="chat-img-attach d-inline-block" href="javascript:void(0)">
+																				<img alt="" class="max-w-100" src="../assets/img/demos/wire-3.jpg">
+																				<div class="chat-meta">
+																				<div class="chat-file-name">Lo-Fi_3.jpg</div>
+																					<div class="chat-file-size">627 KB</div>
+																				</div>
+																			</a>
+																			<a class="chat-img-attach d-inline-block" href="javascript:void(0)">
+																				<img alt="" class="max-w-100" src="../assets/img/demos/wire-4.jpg">
+																				<div class="chat-meta">
+																					<div class="chat-file-name">Lo-Fi_4.jpg</div>
+																					<div class="chat-file-size">627 KB</div>
+																				</div>
+																			</a>
+																		</div>
+																		<span class="chat-time">11:30 am</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="chat chat-left">
+															<div class="chat-avatar">
+																<a href="profile.html" class="avatar">
+																	<img alt="" src="../assets/img/avatars/9.jpg" class="img-responsive img-circle">
+																</a>
+															</div>
+															<div class="chat-body">
+																<div class="chat-bubble">
+																	<div class="chat-content">
+																		<p>Typing ...</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
+										</div>
+									</section>
+									<div class="card-footer bg-white p-10">
+										<div class="actions top-left">
+											<button id="btn_myFileInput" style="border: none; background-color: white;"><i class="icon dripicons-paperclip" aria-hidden="true"></i></button>
+											<label for="btn_myFileInput"></label>
+											<input type="file" id="myFileInput" multiple style="display:none"/>
+										</div>
+										<script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+										<script>
+
+											$(function () {
+												$('#btn_myFileInput').data('default', $('label[for=btn_myFileInput]').text()).click(function () {
+													$('#myFileInput').click()
+												});
+												$('#myFileInput').on('change', function () {
+													var files = this.files;
+													if (!files.length) {
+														$('label[for=btn_myFileInput]').text($('#btn_myFileInput').data('default'));
+														return;
+													}
+													$('label[for=btn_myFileInput]').empty();
+													$('label[for=btn_myFileInput]').append(files.length + ' File');
+													
+												});
+											});
+										</script>
+										<div class="form-group m-10 p-0 p-l-75">
+											<div class="input-group m-t-10">
+												<label class="sr-only">Leave a comment...</label>
+												<input type="text"  id="messageInput" class="form-control border-none" placeholder="Leave a comment..">
+												@if(User.Identity.IsAuthenticated){
+													<button type="button"  id="sendButton" onclick="Sendmassage()" class="btn btn-primary btn-rounded m-r-20">
+													Send
+									</button>
+								}
+								else
+								{
+									<button type="button"  class="btn btn-primary btn-rounded m-r-20">
+													Send
+									</button>
+									
+								}
+
+											</div>
+										</div>
+									</div>
+								</section>
+								
+							</div>
+						</div>
+					</section>
+				</div>
+			

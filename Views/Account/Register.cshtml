@@ -1,0 +1,179 @@
+﻿@model ChattingApp.Models.Registerview
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}<style>
+     ul {
+	
+	width: 300px;
+	list-style-type: none;
+}
+</style>
+
+
+
+<h4 class ="d-flex justify-content-center align-items-center">Signup at Code Seekers</h4>
+<br/>
+<label style="margin:0 auto; color:red; ">@TempData["msg"]</label>
+<div class="d-flex justify-content-center align-items-center vh-80">
+    <div class="register-container">
+        <form asp-action="Register" enctype="multipart/form-data">
+            <div validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="firstname">First name*</label>
+                <input name="firstname" class="form-control" required/>
+                <span validation-for="firstname" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="lastname">Last name</label>
+                <input name="lastname" class="form-control"/>
+                <span validation-for="lastname" class="text-danger"></span>
+            </div>
+            
+            </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="email">Email*</label>
+                <input name="email" class="form-control" type="email" required/>
+                <span validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="phone">Phone</label>
+                <input name="phone" class="form-control" />
+                <span validation-for="phone" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="password">Password*</label>
+                <input name="password" class="form-control" type="password" required/>
+                <span validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="conpassword">Confirm password*</label>
+                <input name="conpassword" class="form-control" type="password" required/>
+                <span validation-for="conpassword" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="jobid">JobT ttle</label>
+                <select name="jobid" class="form-control"  asp-items="@(new SelectList(Model.job,"jobid","jobname"))" required>
+                    <option>Select Job</option>
+                </select>
+                <span validation-for="jobid" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label for="companyid"> Company name</label>
+                 <input type="hidden"  name="companyid" id="companyid"/><button type="button" id="plasbtn" style="display:none" class="btn-success" onclick="saveCompany()">+</button>
+                <input type="text" class="form-control" id="company" onkeyup="goChange(event)" required autocomplete="off"/>
+                <ul id="comchild">
+                   
+                </ul>
+                
+                <span validation-for="companyid" class="text-danger"></span>
+            </div>
+            
+            </div>
+            <div class="form-group">
+                <p>Select your Avatar</p>
+               
+                 <label>
+                     <input for="avatar" type="radio" value="0" name="avatar" checked />
+                    <img class="avatar-icon img_avater"  id="userimg" src="~/images/icons/avatar1.png" alt="" />
+                </label>
+                <label>
+                    <input for="avatar" type="radio" value="1" name="avatar"/>
+                    <img class="avatar-icon img_avater" src="~/images/icons/avatar2.png" alt="" />
+                </label>
+                <label>
+                    <input for="avatar" type="radio" value="2" name="avatar"/>
+                    <img class="avatar-icon img_avater" src="~/images/icons/avatar3.png" alt="" />
+                </label>
+                <label>
+                    <input for="avatar" type="radio" value="3" name="avatar"/>
+                    <img class="avatar-icon img_avater" src="~/images/icons/avatar4.png" alts="" />
+                </label>
+                
+               
+                    <label for="UploadedFile" class="custom-file-upload">
+                        <img class="avatar-icon" src="~/images/icons/plus.png" alts="" />
+                    </label>
+                    <input hidden="hidden"  type="file" id="UploadedFile" name="File" onchange="LoadImg(event)" accept=".jpg,.jpeg,.png" for="images">
+               
+            </div>
+
+            <button type="submit" class="btn btn-sign-up">Register</button>
+            <a class="btn btn-link px-0" asp-action="Login" >Already have an account?</a>
+        </form>
+    </div>
+</div>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+  function LoadImg(e) {
+    for (var i = 0; i < e.srcElement.files.length; i++) {
+     var image = document.getElementById('userimg');
+	image.src = URL.createObjectURL(e.srcElement.files[i]);
+
+        
+    }
+          
+};
+function goChange(e){
+        var s=e.target.value;
+        if (s==undefined||s==''||s==null){ 
+             $('#comchild').html('');
+            return;}
+        $.ajax({
+        type: "GET",
+        url: "/Account/GetCountry",
+        dataType: "json",
+        data: {'id':s},
+        success: function (data) {
+            
+          var dt="";
+         if (data.length > 0) {
+            
+                for (var i = 0; i < data.length; i++) {
+                dt+=" <li class='form-control'><a onclick='setData("+data[i].companyid+",\""+data[i].company+"\")';>"+data[i].company+"</a></li>"
+                }
+                document.getElementById("plasbtn").style.display = "none";
+               
+         }
+          else{
+            document.getElementById("plasbtn").style.display = "block";
+          }
+         $('#comchild').html(dt); 
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    
+    });
+}
+    function setData(a,b){
+         $('#companyid').val(a);
+         $('#company').val(b);
+         $('#comchild').html('');
+    }  
+    function saveCompany(){
+        
+        $.ajax({
+        type: "GET",
+        url: "/Account/SaveCountry",
+        dataType: "json",
+        data: {'id':$('#company').val()},
+        success: function (data) {
+          $('#companyid').val(data.companyid);
+         $('#company').val(data.company);
+          document.getElementById("plasbtn").style.display = "none";
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    
+    });
+}
+    
+</script>
