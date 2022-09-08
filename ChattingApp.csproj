@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Exfile\" />
-    <Folder Include="wwwroot\images\user\" />
   </ItemGroup>
 
 </Project>
