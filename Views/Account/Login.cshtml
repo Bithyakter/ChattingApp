@@ -8,6 +8,7 @@
     <label>@TempData["msg"]</label>
     <div class="login-container">
         <img class="profile-avatar" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+       
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -26,6 +27,7 @@
                     Remember me 
                 </label>
             </div>
+
             <button type="submit" class="btn btn-sign-in">Sign in</button>
             <div class="form-group">
                

@@ -19,14 +19,15 @@ namespace ChattingApp.Controllers
         public ChatController(DBContext _db, IHostingEnvironment _env)
         {
             db = _db;
-            env = _env; 
-          
+            env = _env;          
         }
+
         [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult GetChat(int groupid=0,int uid=0)
         {
           
@@ -37,7 +38,6 @@ namespace ChattingApp.Controllers
                 var userid = int.Parse(User.Claims.Where(c => c.Type == ClaimTypes.Sid).Select(c => c.Value).SingleOrDefault());
                 if (groupid == 0 && uid> 0)
                 {
-
                     var chat = (from c in db.chatinfos
                                 join g in db.groupinfos on c.groupid equals g.groupid
                                 join u in db.userinfos.Where(w=> w.userid==uid) on c.userid equals u.userid
@@ -57,7 +57,7 @@ namespace ChattingApp.Controllers
                                 }).OrderBy(o => o.massagedate).ToList();
                     var dat = (from u in db.userinfos.Where(w=> w.userid==uid) 
                         
-                               select new { groupid=0, u.userid, name = u.firstname + " " + u.lastname, status = u.status == true ? "Online" : "Offline", u.images, mytype = 0 }).ToList();
+                    select new { groupid=0, u.userid, name = u.firstname + " " + u.lastname, status = u.status == true ? "Online" : "Offline", u.images, mytype = 0 }).ToList();
                     obj.Add(dat);
                     if (chat.Count > 0)
                     {
@@ -80,10 +80,8 @@ namespace ChattingApp.Controllers
                                 flag = userid == i.userid ? 0 : 1
                             });
                         }
-
                     }
                     obj.Add(ct);
-
                 }
                 else
                 {
@@ -149,7 +147,6 @@ namespace ChattingApp.Controllers
 
                         }
                         obj.Add(ct);
-
                     }
                     else
                     {
@@ -199,15 +196,10 @@ namespace ChattingApp.Controllers
                                     flag = userid == i.userid ? 0 : 1
                                 });
                             }
-
                         }
                         obj.Add(ct);
                     }
-                }
-                
-
-
-                
+                }                          
             }
 
             else
@@ -218,9 +210,7 @@ namespace ChattingApp.Controllers
                 }
                 if (groupid == 0)
                 {
-                    groupid = db.groupinfos.Select(s=> s.groupid).FirstOrDefault();
-
-                   
+                    groupid = db.groupinfos.Select(s=> s.groupid).FirstOrDefault();                 
                 }
                 if (groupid == 1)
                 {
@@ -268,13 +258,11 @@ namespace ChattingApp.Controllers
                             } 
                         }
                       obj.Add(ct);
-                }
-               
-
-
+                }            
             }
             return Json(obj);
         }
+
         public  string convertTime(DateTime dt)
         {
             string ss = "";
@@ -403,9 +391,8 @@ namespace ChattingApp.Controllers
                 ch.masssage = chat.masssage;
                 ch.massagedate = DateTime.Now;
                 ch.userid = userid;
-
-
             }
+
             if (file != null)
             {
                 string wwwPath = this.env.WebRootPath;
@@ -430,7 +417,6 @@ namespace ChattingApp.Controllers
                         ch.isimg = true;
                     }
                 }
-
             }
             db.Add(ch);
             db.SaveChanges();
@@ -465,6 +451,7 @@ namespace ChattingApp.Controllers
                 return Json("");
             }
         }
+
         public IActionResult GetTotalUser()
         {
            
