@@ -1,8 +1,7 @@
 ﻿@using System.Security.Claims
+
 <!DOCTYPE html>
 <html lang="en">
-
-
 
 <head>
 	<meta charset="UTF-8">
@@ -31,6 +30,7 @@
 								
 	<link rel="stylesheet" href="/../assets/css/layouts/horizontal/themes/theme-a.css">
 </head>
+
 <body class="layout-horizontal">
 
 	<div id="app">
@@ -111,7 +111,7 @@
 				</ul>
 				
 			</div>
-	<div class="header-bottom">
+			<div class="header-bottom">
 				<div class="container-fluid">
 				
 					<nav class="main-menu">
@@ -123,39 +123,39 @@
 							</li>
 							
 							
-                        @if (User.Identity.IsAuthenticated)
-                        {
+						@if (User.Identity.IsAuthenticated)
+						{
                          
-                        @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).SingleOrDefault() == "admin")
-                        { 
-                            <li>
+						@if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).SingleOrDefault() == "admin")
+						{ 
+							<li>
 								<a class="has-arrow" asp-controller="Home" asp-action="Company" aria-expanded="false"><i class="icon dripicons-browser"></i><span class="hide-menu">Company</span></a>
                           
-                        </li>
-                         <li >
-							 <a class="has-arrow" asp-controller="Home" asp-action="Job" aria-expanded="false"><i class="icon dripicons-stack"></i><span class="hide-menu">Job</span></a>
+						</li>
+							<li >
+								<a class="has-arrow" asp-controller="Home" asp-action="Job" aria-expanded="false"><i class="icon dripicons-stack"></i><span class="hide-menu">Job</span></a>
                             
-                        </li>
-                         <li>
-							 <a class="has-arrow" asp-controller="Home" asp-action="Useropload" aria-expanded="false"><i class="icon dripicons-view-thumb"></i><span class="hide-menu">Upload Excel</span></a>
+						</li>
+							<li>
+								<a class="has-arrow" asp-controller="Home" asp-action="Useropload" aria-expanded="false"><i class="icon dripicons-view-thumb"></i><span class="hide-menu">Upload Excel</span></a>
 								
-                        </li>
-                         <li>
-							 <a class="has-arrow" asp-controller="Home" asp-action="Userlist" aria-expanded="false"><i class="icon dripicons-jewel"></i><span class="hide-menu">Export/Block</span></a>
+						</li>
+							<li>
+								<a class="has-arrow" asp-controller="Home" asp-action="Userlist" aria-expanded="false"><i class="icon dripicons-jewel"></i><span class="hide-menu">Export/Block</span></a>
                             
-                        </li>
+						</li>
                         
-                        }
-                         <li>
-							 <a class="has-arrow"  asp-controller="Chat" asp-action="Notification" aria-expanded="false"><i class="icon dripicons-to-do"></i><span class="hide-menu">Notice</span></a>
+						}
+							<li>
+								<a class="has-arrow"  asp-controller="Chat" asp-action="Notification" aria-expanded="false"><i class="icon dripicons-to-do"></i><span class="hide-menu">Notice</span></a>
                            
 						</li>
 
 							}
 							else
 							{
-								 <li>
-							 <a class="has-arrow"  asp-controller="Account" asp-action="Login" aria-expanded="false"><i class="icon dripicons-lock"></i><span class="hide-menu">Log In</span></a>
+									<li>
+								<a class="has-arrow"  asp-controller="Account" asp-action="Login" aria-expanded="false"><i class="icon dripicons-lock"></i><span class="hide-menu">Log In</span></a>
                            
 						</li>
 							}
@@ -163,11 +163,11 @@
 					</nav>
 					
 				</div>
-		</div>
+				</div>
 		</div>	
-     
-		 
+     	 
 	@RenderBody()
+
 </div>
 		
 	
@@ -184,7 +184,6 @@
 		<script src="/../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 		<!-- ================== GLOBAL APP SCRIPTS ==================-->
 		<script src="/../assets/js/global/app.js"></script>
-	</body>
+</body>
 
-	
 </html>

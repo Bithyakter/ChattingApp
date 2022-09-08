@@ -19,12 +19,13 @@ namespace ChattingApp.Models
         public string images { get; set; }
         public int avatar { get; set; }
     }
+
     public class Registerview
     {
         public List<Companyinfo> com { get; set; }
-        public List<Jobinfo> job { get; set; }
-       
+        public List<Jobinfo> job { get; set; }       
     }
+
     public class massagemodel
     {
         public int userid { get; set; }
@@ -32,8 +33,8 @@ namespace ChattingApp.Models
         public string masssage { get; set; }
         public int mtype { get; set; }
         public IFormFile file { get; set; }
-
     }
+
     public class Chatmodel
     {
         public int chatid { get; set; }
@@ -48,14 +49,12 @@ namespace ChattingApp.Models
         public int flag { get; set; }
         public string filename { get; set; }
         public bool isimg { get; set; }
-        public string images { get; set; }
-       
-      
+        public string images { get; set; }  
     }
+
     public class Usermodel
-    {
-        
-              public int userid { get; set; }
+    {      
+        public int userid { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string email { get; set; }
@@ -64,19 +63,15 @@ namespace ChattingApp.Models
         public string jobname { get; set; }
         public string company { get; set; }
         public string role { get; set; }
-        public string images { get; set; }
-       
-        
+        public string images { get; set; }            
     }
     public class Notification
-    {
-      
+    {   
         public int notid { get; set; }
         public string notification { get; set; }
 
         public string notificationdate { get; set; }
 
         public int userid { get; set; }
-
     }
 }

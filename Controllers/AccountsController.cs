@@ -6,13 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Net.Security;
-using System.Net.Sockets;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,16 +21,18 @@ namespace ChattingApp.Controllers
         private readonly DBContext db;
         private IHostingEnvironment env;
 
-        public AccountController(DBContext _db,  IHostingEnvironment _env)
+        public AccountController(DBContext _db, IHostingEnvironment _env)
         {
             db = _db;
-            env= _env;  
+            env = _env;
         }
+
         public IActionResult Index()
-        { return View(); 
+        {
+            return View();
         }
-        
-            [HttpGet]
+
+        [HttpGet]
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -51,15 +50,15 @@ namespace ChattingApp.Controllers
         public async Task<IActionResult> Login(string email, string password)
         {
             @TempData["msg"] = "";
-              // Find and validate the user:
-              Userinfo user = GetUserByUsername(email, password);
+            // Find and validate the user:
+            Userinfo user = GetUserByUsername(email, password);
             if (user == null)
             {
                 @TempData["msg"] = "Incorrect username or password.";
                 ModelState.AddModelError("", "Incorrect username or password.");
                 return View();
             }
-            else if (user.isvarify==false)
+            else if (user.isvarify == false)
             {
                 return RedirectToAction("Confirmation", "Account", user);
             }
@@ -78,40 +77,38 @@ namespace ChattingApp.Controllers
                 identity.AddClaim(new Claim(ClaimTypes.Sid, user.userid.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Role, user.role));
 
-               
                 // Sign in
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(principal));
 
-
                 return RedirectToAction("Index", "Chat");
             }
-            
         }
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             var uid = int.Parse(User.Claims.Where(c => c.Type == ClaimTypes.Sid).Select(c => c.Value).SingleOrDefault());
-            var user=db.userinfos.Where(w=> w.userid == uid).FirstOrDefault();
+            var user = db.userinfos.Where(w => w.userid == uid).FirstOrDefault();
             user.status = false;
             db.SaveChanges();
             await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Chat");
         }
+
         private Userinfo GetUserByUsername(string username, string password)
         {
-
-           
             var code = Convert.ToBase64String((new ASCIIEncoding()).GetBytes(password)).ToCharArray().Select(x => String.Format("{0:X}", (int)x)).Aggregate(new StringBuilder(), (x, y) => x.Append(y)).ToString();
             Userinfo us = db.userinfos.Where(w => w.email == username && w.password == code).FirstOrDefault();
             return us;
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             Registerview registerview = new Registerview();
             registerview.job = db.jobinfos.ToList();
-           
+
             return View(registerview);
         }
 
@@ -120,38 +117,39 @@ namespace ChattingApp.Controllers
         public IActionResult Register(Registermodel user, IFormFile File)
         {
             @TempData["msg"] = "";
-            if (user.password!=user.conpassword)
+            if (user.password != user.conpassword)
             {
                 @TempData["msg"] = "Password not match.";
-                
+
                 Registerview registerview = new Registerview();
                 registerview.job = db.jobinfos.ToList();
-               
+
                 return View(registerview);
             }
-           
+
             var code = Convert.ToBase64String((new ASCIIEncoding()).GetBytes(user.password)).ToCharArray().Select(x => String.Format("{0:X}", (int)x)).Aggregate(new StringBuilder(), (x, y) => x.Append(y)).ToString();
             if (ModelState.IsValid)
             {
-                var checkuser=db.userinfos.Where(w => w.email == user.email).FirstOrDefault();
-                if (checkuser != null) {
+                var checkuser = db.userinfos.Where(w => w.email == user.email).FirstOrDefault();
+                if (checkuser != null)
+                {
                     @TempData["msg"] = "Use another email.";
-                  
+
                     Registerview registerview = new Registerview();
                     registerview.job = db.jobinfos.ToList();
-                   
+
                     return View(registerview);
                 }
-                Userinfo us=new Userinfo();
-                us.firstname=user.firstname;
-                us.lastname=user.lastname;
-                us.email=user.email;
-                us.phone=user.phone;
-                us.password= code;
-                us.role="user";
+                Userinfo us = new Userinfo();
+                us.firstname = user.firstname;
+                us.lastname = user.lastname;
+                us.email = user.email;
+                us.phone = user.phone;
+                us.password = code;
+                us.role = "user";
                 us.jobid = user.jobid;
                 us.companyid = user.companyid;
-                if (File!=null)
+                if (File != null)
                 {
                     string wwwPath = this.env.WebRootPath;
                     string contentPath = this.env.ContentRootPath;
@@ -161,16 +159,15 @@ namespace ChattingApp.Controllers
                     {
                         Directory.CreateDirectory(path);
                     }
-                   
-                        string ext = Path.GetExtension(File.FileName);
-                        string fname = con  + ext;
-                        using (FileStream stream = new FileStream(Path.Combine(path, fname), FileMode.Create))
-                        {
+
+                    string ext = Path.GetExtension(File.FileName);
+                    string fname = con + ext;
+                    using (FileStream stream = new FileStream(Path.Combine(path, fname), FileMode.Create))
+                    {
 
                         File.CopyTo(stream);
                         us.images = "images/user/" + fname;
                     }
-                    
                 }
                 else
                 {
@@ -180,7 +177,7 @@ namespace ChattingApp.Controllers
                 us.varificationcode = generateCode();
                 db.userinfos.Add(us);
                 db.SaveChanges();
-                senDmail(us.firstname,us.email,us.varificationcode);
+                senDmail(us.firstname, us.email, us.varificationcode);
                 return RedirectToAction("Confirmation", "Account", us);
             }
             else
@@ -191,10 +188,9 @@ namespace ChattingApp.Controllers
                 registerview.com = db.companyinfos.ToList();
                 return View(registerview);
             }
-            
         }
 
-        private void senDmail(string firstname,string email, string varificationcode)
+        private void senDmail(string firstname, string email, string varificationcode)
         {
             try
             {
@@ -204,9 +200,9 @@ namespace ChattingApp.Controllers
                 message.To.Add(new MailAddress(email));
                 message.Subject = "Hi-Chat Confirmation";
                 message.IsBodyHtml = true;
-                message.Body = "<div><h3>Hi " + firstname + "</h3><br><p>Your verification code is <b>"+ varificationcode + "</b> <p><br><p>Thank you</p></div>";
+                message.Body = "<div><h3>Hi " + firstname + "</h3><br><p>Your verification code is <b>" + varificationcode + "</b> <p><br><p>Thank you!</p></div>";
                 using (SmtpClient smtp = new SmtpClient())
-                {                     
+                {
                     smtp.Credentials = new NetworkCredential("confirmation@code-seekers.com", "bas8E4^96");
                     smtp.Port = 25;
                     smtp.Host = "code-seekers.com";
@@ -216,7 +212,7 @@ namespace ChattingApp.Controllers
                     smtp.Send(message);
                 }
             }
-            catch (Exception) 
+            catch (Exception)
             {
             }
         }
@@ -228,6 +224,7 @@ namespace ChattingApp.Controllers
             Random _rdm = new Random();
             return _rdm.Next(_min, _max).ToString();
         }
+
         [Authorize]
         [HttpGet]
         public IActionResult Confirmation(Userinfo user)
@@ -241,7 +238,7 @@ namespace ChattingApp.Controllers
             var check = db.userinfos.Where(w => w.email == useremail && w.varificationcode == confarmation).FirstOrDefault();
             if (check != null)
             {
-                check.isvarify=true;
+                check.isvarify = true;
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
@@ -251,15 +248,14 @@ namespace ChattingApp.Controllers
                 var ch = db.userinfos.Where(w => w.email == useremail).FirstOrDefault();
                 return View(ch);
             }
-           
         }
-      
-        public IActionResult Resend( string id)
+
+        public IActionResult Resend(string id)
         {
             var check = db.userinfos.Where(w => w.email == id).FirstOrDefault();
             if (check != null)
             {
-                check.varificationcode = generateCode();                
+                check.varificationcode = generateCode();
                 db.SaveChanges();
                 senDmail(check.firstname, check.email, check.varificationcode);
                 TempData["msg"] = "Send new code to your email.";
@@ -270,6 +266,7 @@ namespace ChattingApp.Controllers
             }
             return RedirectToAction("Confirmation");
         }
+
         public IActionResult GetCountry(string id)
         {
             var check = db.companyinfos.Where(w => w.company.Contains(id)).ToList();
@@ -277,10 +274,10 @@ namespace ChattingApp.Controllers
         }
         public IActionResult SaveCountry(string id)
         {
-            Companyinfo com=new Companyinfo();
+            Companyinfo com = new Companyinfo();
             com.company = id;
             db.companyinfos.Add(com);
-            db.SaveChanges();   
+            db.SaveChanges();
             return Json(com);
         }
     }

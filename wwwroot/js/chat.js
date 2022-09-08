@@ -31,7 +31,6 @@ connection.start().then(function () {
 });
 
 
-
 function Getallmassage(x,y) {
     $.ajax({
         type: "GET",
@@ -84,13 +83,9 @@ function Getallmassage(x,y) {
                                 else {
                                     htm += ' <a href="' + data[1][i].file + '" ><div class="chat-meta"><div class="chat-file-name" style="color:black">' + data[1][i].filename + '</div> </a>';
                                     htm += ' <div class="chat-file-size"></div>';
-
                                 }
-
-
                                 htm += ' </div></a></div></div>';
-                                htm += ' <div class="chat-content"><p>' + msgg + '</p><span class="chat-time">' + data[1][i].massagedate + '</span></div></div></div></div>';
-                               
+                                htm += ' <div class="chat-content"><p>' + msgg + '</p><span class="chat-time">' + data[1][i].massagedate + '</span></div></div></div></div>';                              
                             }
                         } 
                                     
@@ -99,7 +94,6 @@ function Getallmassage(x,y) {
                             if (data[1][i].flag == 0) {
                                 htm += ' <div class="chat chat-right"><div class="chat-body"><div class="chat-bubble"><div class="chat-content">';
                                 htm += ' <p>' + msgg + '</p ><span class="chat-time">' + data[1][i].massagedate + '</span> </div></div></div></div>';
-
                             }
                             else {
                                 htm += ' <div class="chat chat-left"><div class="chat-avatar"><a class="avatar"><img alt="" title="' + data[1][i].firstname + '" src="' + data[1][i].images + '" class="img-responsive img-circle">	</a></div>';

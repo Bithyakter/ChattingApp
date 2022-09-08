@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +17,6 @@ namespace ChattingApp.Models
         public virtual DbSet<Groupinfo> groupinfos { get; set; }
         public virtual DbSet<Groupmember> groupmembers { get; set; }
         public virtual DbSet<Chatinfo> chatinfos { get; set; }
-        public virtual DbSet<Notificationinfo> notificationinfos { get; set; }
-        
-
+        public virtual DbSet<Notificationinfo> notificationinfos { get; set; }       
     }
 }

@@ -13,7 +13,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-
 namespace ChattingApp.Controllers
 {
     public class HomeController : Controller
@@ -26,16 +25,19 @@ namespace ChattingApp.Controllers
             db = _db;
             env = _env;
         }
+
         [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+
         [Authorize (Roles ="admin")]
         public IActionResult Company()
         {
             return View(db.companyinfos.ToList());
         }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,6 +50,7 @@ namespace ChattingApp.Controllers
             }
             return View(db.companyinfos.ToList());
         }
+
         [Authorize(Roles = "admin")]       
         public IActionResult DeleteCompany(int id)
         {
@@ -81,14 +84,14 @@ namespace ChattingApp.Controllers
             db.companyinfos.Remove(company);
             db.SaveChanges();
 
-
-
             return RedirectToAction("Company");
         }
+
         public IActionResult Job()
         {
             return View(db.jobinfos.ToList());
         }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -101,6 +104,7 @@ namespace ChattingApp.Controllers
             }
             return View(db.jobinfos.ToList());
         }
+
         [Authorize(Roles = "admin")]
         public IActionResult DeleteJob(int id)
         {
@@ -229,11 +233,11 @@ namespace ChattingApp.Controllers
                     }
 
                 }
-
             }
             @TempData["msg"] = "File upload successfull";
             return View();
         }
+
         [Authorize(Roles = "admin")]
         public IActionResult Userlist()
         {
