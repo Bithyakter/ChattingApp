@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Account.cshtml";
-}<style>
+}
+<style>
      ul {
 	
 	width: 300px;
@@ -11,8 +12,9 @@
 </style>
 
 
-<h4 class ="d-flex justify-content-center align-items-center">Signup at Code Seekers</h4>
+<h4 class ="d-flex justify-content-center align-items-center">Signup at Hi-Chat</h4>
 <br/>
+
 <label style="margin:0 auto; color:red; ">@TempData["msg"]</label>
 <div class="d-flex justify-content-center align-items-center vh-80">
     <div class="register-container">
@@ -57,7 +59,7 @@
             </div>
             <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
-                <label for="jobid">JobT ttle</label>
+                <label for="jobid">JobT Title</label>
                 <select name="jobid" class="form-control"  asp-items="@(new SelectList(Model.job,"jobid","jobname"))" required>
                     <option>Select Job</option>
                 </select>
@@ -96,10 +98,10 @@
                 </label>
                 
                
-                    <label for="UploadedFile" class="custom-file-upload">
+                    @*<label for="UploadedFile" class="custom-file-upload">
                         <img class="avatar-icon" src="~/images/icons/plus.png" alts="" />
                     </label>
-                    <input hidden="hidden"  type="file" id="UploadedFile" name="File" onchange="LoadImg(event)" accept=".jpg,.jpeg,.png" for="images">
+                    <input hidden="hidden"  type="file" id="UploadedFile" name="File" onchange="LoadImg(event)" accept=".jpg,.jpeg,.png" for="images">*@
                
             </div>
 
