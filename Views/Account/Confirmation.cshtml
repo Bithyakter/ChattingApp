@@ -4,21 +4,24 @@
     Layout = "~/Views/Shared/_Account.cshtml";
 }
 
-  <div class="card">
+  <div class="card col-md-8 offset-2 mt-5 mb-5">
       <label>@TempData["msg"]</label>
       <form asp-action="Confirmation">
-          <div class="card-header">
+          <div class="card-header mt-4">
               <h4>Confirmation code</h4>
           </div> 
-          <div class="card-body">
-               <input type="hidden" name="useremail" value="@Model.email"/>
-                  <div class="d-flex flex-row" >
-                   <input type="number" name="confarmation" required/>
-                   <button type="submit">Confirm</button><br />
-                   <a asp-action="Resend" asp-route-id="@Model.email">Resend Email</a>
-                  </div>
+          <div class="card-body mt-3">
+            <input type="hidden" name="useremail" value="@Model.email"/>
+                <div class="d-flex flex-row" >
+                <input type="number" class="form-control" name="confarmation" required/>
+                <button type="submit" class="btn btn-primary mx-3">Confirm</button>
+                <br />
+                  
+                </div>
+
+                <a asp-action="Resend" class="mt-3" asp-route-id="@Model.email">Resend Email</a>
                  
           </div>
-          </form>
-        </div>
+    </form>
+</div>
 

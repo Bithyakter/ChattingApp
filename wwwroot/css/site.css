@@ -1,9 +1,11 @@
-﻿.sidebar {
+﻿
+.sidebar {
     display: flex;
     flex-direction: column;
     background: #157cce;
     color: white;
 }
+
 
     .sidebar a {
         color: white;

@@ -1,8 +1,7 @@
 ﻿@using System.Security.Claims
+
 <!DOCTYPE html>
 <html lang="en">
-
-
 
 <head>
 	<meta charset="UTF-8">
@@ -31,6 +30,7 @@
 								
 	<link rel="stylesheet" href="/../assets/css/layouts/horizontal/themes/theme-a.css">
 </head>
+
 <body class="layout-horizontal">
 
 	<div id="app">
@@ -44,9 +44,10 @@
 						  @if (User.Identity.IsAuthenticated)
                         {
 						<li class="nav-item dropdown dropdown-menu-lg">
-							<a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link nav-pill user-avatar " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 								<img src="../assets/img/avatars/1.jpg" class="w-35 rounded-circle" alt="Albert Einstein">
 							</a>
+
 							<div class="dropdown-menu dropdown-menu-right dropdown-menu-accout">
 								<div class="dropdown-header pb-3">
 									<div class="media d-user">
@@ -93,7 +94,7 @@
 									
 									<a href="/Chat/Index">
 										
-										<h1 class="brand-text">Codespeaker.com</h1>
+										<h1 class="brand-text fw-bold">Hi-Chat</h1>
 									</a>
 									
 								</li>
@@ -111,7 +112,7 @@
 				</ul>
 				
 			</div>
-	<div class="header-bottom">
+			<div class="header-bottom">
 				<div class="container-fluid">
 				
 					<nav class="main-menu">
@@ -123,39 +124,39 @@
 							</li>
 							
 							
-                        @if (User.Identity.IsAuthenticated)
-                        {
+						@if (User.Identity.IsAuthenticated)
+						{
                          
-                        @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).SingleOrDefault() == "admin")
-                        { 
-                            <li>
+						@if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).SingleOrDefault() == "admin")
+						{ 
+							<li>
 								<a class="has-arrow" asp-controller="Home" asp-action="Company" aria-expanded="false"><i class="icon dripicons-browser"></i><span class="hide-menu">Company</span></a>
                           
-                        </li>
-                         <li >
-							 <a class="has-arrow" asp-controller="Home" asp-action="Job" aria-expanded="false"><i class="icon dripicons-stack"></i><span class="hide-menu">Job</span></a>
+						</li>
+							<li >
+								<a class="has-arrow" asp-controller="Home" asp-action="Job" aria-expanded="false"><i class="icon dripicons-stack"></i><span class="hide-menu">Job</span></a>
                             
-                        </li>
-                         <li>
-							 <a class="has-arrow" asp-controller="Home" asp-action="Useropload" aria-expanded="false"><i class="icon dripicons-view-thumb"></i><span class="hide-menu">Upload Excel</span></a>
+						</li>
+							<li>
+								<a class="has-arrow" asp-controller="Home" asp-action="Useropload" aria-expanded="false"><i class="icon dripicons-view-thumb"></i><span class="hide-menu">Upload Excel</span></a>
 								
-                        </li>
-                         <li>
-							 <a class="has-arrow" asp-controller="Home" asp-action="Userlist" aria-expanded="false"><i class="icon dripicons-jewel"></i><span class="hide-menu">Export/Block</span></a>
+						</li>
+							<li>
+								<a class="has-arrow" asp-controller="Home" asp-action="Userlist" aria-expanded="false"><i class="icon dripicons-jewel"></i><span class="hide-menu">Export/Block</span></a>
                             
-                        </li>
+						</li>
                         
-                        }
-                         <li>
-							 <a class="has-arrow"  asp-controller="Chat" asp-action="Notification" aria-expanded="false"><i class="icon dripicons-to-do"></i><span class="hide-menu">Notice</span></a>
+						}
+							<li>
+								<a class="has-arrow"  asp-controller="Chat" asp-action="Notification" aria-expanded="false"><i class="icon dripicons-to-do"></i><span class="hide-menu">Notice</span></a>
                            
 						</li>
 
 							}
 							else
 							{
-								 <li>
-							 <a class="has-arrow"  asp-controller="Account" asp-action="Login" aria-expanded="false"><i class="icon dripicons-lock"></i><span class="hide-menu">Log In</span></a>
+									<li>
+								<a class="has-arrow"  asp-controller="Account" asp-action="Login" aria-expanded="false"><i class="icon dripicons-lock"></i><span class="hide-menu">Log In</span></a>
                            
 						</li>
 							}
@@ -163,11 +164,11 @@
 					</nav>
 					
 				</div>
-		</div>
+				</div>
 		</div>	
-     
-		 
+     	 
 	@RenderBody()
+
 </div>
 		
 	
@@ -184,7 +185,6 @@
 		<script src="/../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 		<!-- ================== GLOBAL APP SCRIPTS ==================-->
 		<script src="/../assets/js/global/app.js"></script>
-	</body>
+</body>
 
-	
 </html>

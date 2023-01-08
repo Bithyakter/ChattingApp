@@ -18,7 +18,6 @@ namespace ChattingApp.Models
         [Key]
         public int jobid { get; set; }
         public string jobname { get; set; }
-
     }
     public class Userinfo
     {
@@ -38,8 +37,7 @@ namespace ChattingApp.Models
         public int jobid { get; set; }
         public Jobinfo job { get; set; }
         public int companyid { get; set; }
-        public Companyinfo comp { get; set; }
-        
+        public Companyinfo comp { get; set; }      
     }
 
     public class Groupinfo
@@ -47,10 +45,9 @@ namespace ChattingApp.Models
         [Key]
         public int groupid { get; set; }
         public string groupname { get; set; }
-        public bool isgroup { get; set; }
-      
-
+        public bool isgroup { get; set; }    
     }
+
     public class Groupmember
     {
         [Key]
@@ -89,6 +86,5 @@ namespace ChattingApp.Models
         public int userid { get; set; }
    
         public Userinfo user { get; set; }
-
     }
 }

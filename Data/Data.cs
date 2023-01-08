@@ -48,8 +48,6 @@ namespace ChattingApp.Data
                 }
                 db.SaveChanges();
             }
-
-
         }
     }
 }
